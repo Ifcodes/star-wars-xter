@@ -1,0 +1,7 @@
+button {
+  @apply border border-solid border-dark dark:border-white outline-none w-[12rem] h-[3rem] p-4 flex items-center justify-center bg-transparent rounded-md gap-4 transition-all font-medium;
+
+  &:hover {
+    @apply transition-all border-r-4 border-b-4 border-b-dark dark:border-r-4 dark:border-b-4 dark:border-white;
+  }
+}

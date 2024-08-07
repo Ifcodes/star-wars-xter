@@ -1,6 +1,6 @@
 .wrapper-dark,
 .wrapper-light {
-  @apply min-h-screen w-full p-0 m-0 absolute top-0 left-0;
+  @apply min-h-screen w-screen p-0 m-0 relative left-0 top-0;
 }
 
 .wrapper-dark {
@@ -11,6 +11,6 @@
   @apply bg-[#f9fafb99];
 }
 
-.main-content {
-  @apply lg:w-[85%] xl:w-[75%] w-full lg:mx-auto;
+main {
+  @apply pt-40 pb-20;
 }

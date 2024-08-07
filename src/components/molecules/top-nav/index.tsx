@@ -4,12 +4,12 @@ import "./top-nav.scss";
 
 const TopNav = () => {
   return (
-    <nav>
-      <div className="nav-content">
+    <header className="top-nav-header">
+      <nav className="nav-content">
         <Logo />
         <ThemeSwitch />
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 };
 

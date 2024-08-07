@@ -1,0 +1,15 @@
+.character-card-wrapper {
+  @apply w-full;
+
+  .character-img-container {
+    @apply w-full h-[320px] rounded-md bg-grey1 mb-2 transition-all cursor-pointer;
+
+    img {
+      @apply w-full h-full rounded-md object-cover transition-transform duration-300;
+    }
+
+    &:hover {
+      @apply border-r-8 border-b-8 border-grey1;
+    }
+  }
+}

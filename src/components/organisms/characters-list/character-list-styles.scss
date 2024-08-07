@@ -1,0 +1,7 @@
+.character-list-wrapper {
+  @apply w-[70%] mx-auto;
+
+  .character-list {
+    @apply w-full grid grid-cols-3 mt-8 gap-x-4 gap-y-8;
+  }
+}

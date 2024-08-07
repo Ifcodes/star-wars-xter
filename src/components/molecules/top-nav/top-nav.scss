@@ -1,5 +1,5 @@
-nav {
-  @apply w-full h-32 flex items-center fixed top-0 left-0 border-b border-solid border-grey1 dark:border-white;
+.top-nav-header {
+  @apply w-full h-32 mb-12 flex items-center fixed top-0 left-0 border-b border-solid border-grey1 dark:border-white bg-offWhite dark:bg-dark;
 
   .nav-content {
     @apply w-full lg:w-[70%] lg:mx-auto flex justify-between items-center;
