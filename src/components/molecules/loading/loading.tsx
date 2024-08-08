@@ -1,12 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import FetchErrorComponent from "../../atoms/fetch-error-component";
 import CharacterCardSkeleton from "../../atoms/skeletons/character-card-skeleton";
 
 interface ILoadingPageProps {
   isLoading: boolean;
-  error?: string;
+  error?: any;
   count: number;
+  handleErrorCta?: () => void;
 }
-const Loading = ({ isLoading, error, count }: ILoadingPageProps) => {
+const Loading = ({
+  isLoading,
+  error,
+  count,
+  handleErrorCta,
+}: ILoadingPageProps) => {
   if (isLoading) {
     return (
       <div
@@ -23,7 +30,13 @@ const Loading = ({ isLoading, error, count }: ILoadingPageProps) => {
   }
 
   if (error) {
-    return <FetchErrorComponent error={error} ctaText="Try Again!" />;
+    return (
+      <FetchErrorComponent
+        handleCta={handleErrorCta}
+        error={error}
+        ctaText="Try Again!"
+      />
+    );
   }
 
   return null;

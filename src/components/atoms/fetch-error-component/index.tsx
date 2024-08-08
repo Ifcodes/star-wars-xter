@@ -14,6 +14,7 @@ const FetchErrorComponent = ({
   handleCta,
 }: IFetchErrorDisplayProps) => {
   console.log({ error });
+
   return (
     <article
       data-testid="error"
@@ -21,7 +22,10 @@ const FetchErrorComponent = ({
     >
       <Title
         otherClasses="mb-4"
-        text="Opps! Something went wrong."
+        text={`Opps! Something went wrong. ${
+          error?.message === "Network Error" &&
+          "Please check your network connection"
+        }`}
         variant="h2"
       />
       <Button onClick={handleCta}>{ctaText}</Button>
