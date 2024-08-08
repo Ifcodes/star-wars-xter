@@ -5,15 +5,26 @@ import "./character-card-style.scss";
 interface ICharacterCardProps {
   imageUrl: string;
   characterName: string;
+  handleCardClick: () => void;
 }
 
-const CharacterCard = ({ imageUrl, characterName }: ICharacterCardProps) => {
+const CharacterCard = ({
+  imageUrl,
+  characterName,
+  handleCardClick,
+}: ICharacterCardProps) => {
   return (
-    <div className="character-card-wrapper">
+    <div className="character-card-wrapper" onClick={handleCardClick}>
       <div className="character-img-container">
         <LazyLoadImage src={imageUrl} aria-labelledby={characterName} />
       </div>
-      <Title id={characterName} text={characterName} variant="h2" />
+      <Title
+        id={characterName}
+        otherClasses="cursor-pointer"
+        text={characterName}
+        variant="h2"
+        onClick={handleCardClick}
+      />
     </div>
   );
 };
