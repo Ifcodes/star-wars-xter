@@ -18,7 +18,9 @@ const ThemeSwitch = () => {
       title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
     >
       {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-      {theme === "dark" ? "Switch to Light" : "Switch to Dark"}
+      <span className="hidden lg:flex">
+        {theme === "dark" ? "Switch to Light" : "Switch to Dark"}
+      </span>
     </Button>
   );
 };

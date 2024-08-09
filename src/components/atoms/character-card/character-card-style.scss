@@ -9,7 +9,7 @@
     }
 
     &:hover {
-      @apply border-r-8 border-b-8 border-grey1;
+      @apply border-r-4 border-b-4 dark:border-grey1 border-gray-500;
     }
   }
 }

@@ -21,12 +21,12 @@ const FetchErrorComponent = ({
       className="w-full min-h-[60vh] flex flex-col justify-center items-center text-center"
     >
       <Title
-        otherClasses="mb-4"
+        otherClasses="mb-4  w-[35rem]"
         text={`Opps! Something went wrong. ${
           error?.message === "Network Error" &&
-          "Please check your network connection"
+          "\n Please check your network connection"
         }`}
-        variant="h2"
+        variant="h1"
       />
       <Button onClick={handleCta}>{ctaText}</Button>
     </article>

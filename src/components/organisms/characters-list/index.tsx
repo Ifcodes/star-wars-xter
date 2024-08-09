@@ -6,33 +6,65 @@ import CharacterCard from "../../atoms/character-card";
 import Loading from "../../molecules/loading/loading";
 import { useFetchCharacters } from "../../../hooks/useFetchCharacters";
 import Pagenation from "../../atoms/pagenation";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import CharacterDetails from "../../molecules/character-details";
+import FetchErrorComponent from "../../atoms/fetch-error-component";
+import { SearchInput } from "../../atoms/inputs/search-input/SearchInput";
+import { useDebounce } from "react-use";
 
 const CharactersList = () => {
+  const [searchItem, setSearchItem] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState<any>(null);
-  const { page, characters, loading, error, getCharacters, setPage } =
-    useFetchCharacters();
+  const {
+    totalCharacters,
+    page,
+    characters,
+    loading,
+    error,
+    getCharacters,
+    setPage,
+    searchCharacters,
+  } = useFetchCharacters(searchItem);
 
-  const handleCharacterSelection = (character: any) => {
+  useDebounce(
+    () => {
+      searchCharacters();
+    },
+    1000,
+    [searchItem]
+  );
+
+  const handleCharacterSelection = useCallback((character: any) => {
     setSelectedCharacter(character);
     setOpenModal(true);
-  };
+  }, []);
 
-  console.log({ selectedCharacter });
+  const handlePageChange = useCallback((val: any) => setPage(val), []);
+
+  if (error) {
+    return (
+      <FetchErrorComponent
+        handleCta={getCharacters}
+        error={error}
+        ctaText="Try Again!"
+      />
+    );
+  }
+
   return (
     <section role="Character List Section" className="character-list-wrapper">
-      <header>
-        <Title text="Characters" variant="h1" />
-        <Text text="Here are your favourite star wars character." />
+      <header className="section-header">
+        <div>
+          <Title text="Characters" variant="h1" />
+          <Text text="Here are your favourite star wars character." />
+        </div>
+        <SearchInput
+          value={searchItem}
+          onChange={(e) => setSearchItem(e.target.value)}
+        />
       </header>
-      <Loading
-        count={9}
-        isLoading={loading}
-        error={error}
-        handleErrorCta={getCharacters}
-      />
+      <Loading count={9} isLoading={loading} />
       <div className="character-list">
         {characters.length > 0 &&
           characters.map((character) => (
@@ -47,10 +79,10 @@ const CharactersList = () => {
       {characters.length > 0 && (
         <div className="flex justify-end">
           <Pagenation
-            handleCurrentPage={setPage}
+            handleCurrentPage={handlePageChange}
             currentPage={page}
             totalPerPage={10}
-            totalItems={82}
+            totalItems={totalCharacters}
           />
         </div>
       )}
