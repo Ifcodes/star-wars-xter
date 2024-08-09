@@ -15,6 +15,7 @@ const ThemeSwitch = () => {
     <Button
       onClick={handleToggleTheme}
       data-testid="theme-toggle-button"
+      otherClasses="w-12 h-12 lg:w-[12rem]"
       title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
     >
       {theme === "dark" ? <SunIcon /> : <MoonIcon />}

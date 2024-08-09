@@ -41,7 +41,7 @@ const Pagenation = memo(
           })}
         />
 
-        <div className="page-numbers-container">
+        <div className="page-numbers-container hidden">
           {pageList.map((_p, idx) => (
             <button
               onClick={() => handleCurrentPage(idx + 1)}

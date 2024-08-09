@@ -1,10 +1,11 @@
 .character-list-wrapper {
+  @apply w-[90%] lg:w-[70%] min-h-[80vh] mx-auto relative z-10;
+
   .section-header {
-    @apply flex items-center justify-between;
+    @apply block space-y-6 md:flex items-center justify-between;
   }
-  @apply w-[70%] min-h-[80vh] mx-auto relative z-10;
 
   .character-list {
-    @apply w-full grid grid-cols-3 mt-8 gap-x-4 gap-y-8;
+    @apply w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center mt-8 gap-x-4 gap-y-8;
   }
 }

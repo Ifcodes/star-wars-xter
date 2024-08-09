@@ -1,5 +1,6 @@
 import React, { DetailedHTMLProps, ReactNode } from "react";
 import "./button-styles.scss";
+import clsx from "clsx";
 
 interface IButtonBrops
   extends DetailedHTMLProps<
@@ -7,9 +8,14 @@ interface IButtonBrops
     HTMLButtonElement
   > {
   children: ReactNode;
+  otherClasses?: string;
 }
-const Button = ({ children, ...props }: IButtonBrops) => {
-  return <button {...props}>{children}</button>;
+const Button = ({ children, otherClasses, ...props }: IButtonBrops) => {
+  return (
+    <button className={clsx(otherClasses)} {...props}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;

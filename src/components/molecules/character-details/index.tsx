@@ -19,9 +19,9 @@ interface IDescriptionProps {
 
 const Description = ({ title, content }: IDescriptionProps) => {
   return (
-    <article className="flex items-center">
+    <article className="md:flex items-center">
       <Title text={`${title}:`} variant="h2" />
-      <Text text={content} otherClasses="ml-4" />
+      <Text text={content} otherClasses="md:ml-4" />
     </article>
   );
 };

@@ -28,7 +28,7 @@ export const SearchInput = memo(({ onSearch, ...props }: ISearchInputProps) => {
         <input
           aria-label="search-box"
           data-testid="search"
-          className=" flex-grow border-none outline-none ml-3"
+          className=" flex-grow border-none outline-none ml-3 bg-transparent"
           type="search"
           placeholder="Search"
           onFocus={() => handleToggleFocus("focus")}

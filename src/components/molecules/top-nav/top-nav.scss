@@ -2,6 +2,6 @@
   @apply w-full h-32 mb-12 flex items-center fixed top-0 left-0 border-b border-solid border-grey1 dark:border-white bg-offWhite dark:bg-dark z-50;
 
   .nav-content {
-    @apply w-full lg:w-[70%] lg:mx-auto flex justify-between items-center;
+    @apply w-[85%] lg:w-[70%] mx-auto flex justify-between items-center;
   }
 }
