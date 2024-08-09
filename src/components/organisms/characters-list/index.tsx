@@ -56,8 +56,11 @@ const CharactersList = () => {
     <section role="Character List Section" className="character-list-wrapper">
       <header className="section-header">
         <div>
-          <Title text="Characters" variant="h1" />
-          <Text text="Here are your favourite star wars character." />
+          <Title data-testid="page-title" text="Characters" variant="h1" />
+          <Text
+            data-testid="page-description"
+            text="Here are your favourite star wars character."
+          />
         </div>
         <SearchInput
           value={searchItem}

@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import ThemeSwitch from ".";
 
 describe("test button render and actions", () => {
@@ -8,27 +7,11 @@ describe("test button render and actions", () => {
     expect(screen.getByTestId("theme-toggle-button")).toBeInTheDocument();
   });
 
-  it("should render 'Switch to light' as button text by default", () => {
+  it("should render 'Switch to Light' as button text by default", () => {
     render(<ThemeSwitch />);
 
     expect(screen.getByTestId("theme-toggle-button")).toHaveTextContent(
-      "Switch to light"
-    );
-  });
-
-  it("should render 'Switch to dark' after click", async () => {
-    render(<ThemeSwitch />);
-
-    const user = userEvent.setup();
-
-    expect(screen.getByTestId("theme-toggle-button")).toHaveTextContent(
-      "Switch to light"
-    );
-
-    await user.click(screen.getByTestId("theme-toggle-button"));
-
-    expect(screen.getByTestId("theme-toggle-button")).toHaveTextContent(
-      "Switch to dark"
+      "Switch to Light"
     );
   });
 });

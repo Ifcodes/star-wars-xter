@@ -14,7 +14,11 @@ const CharacterCard = memo(
     return (
       <div className="character-card-wrapper" onClick={handleCardClick}>
         <div className="character-img-container">
-          <LazyLoadImage src={imageUrl} aria-labelledby={characterName} />
+          <LazyLoadImage
+            src={imageUrl}
+            aria-labelledby={characterName}
+            alt={characterName}
+          />
         </div>
         <Title
           id={characterName}
