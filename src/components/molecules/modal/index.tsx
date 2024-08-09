@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { ReactNode, useRef } from "react";
+import { ReactNode, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useClickAway } from "react-use";
 import "./model-styles.scss";

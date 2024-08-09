@@ -11,11 +11,13 @@ import CharacterDetails from "../../molecules/character-details";
 import FetchErrorComponent from "../../atoms/fetch-error-component";
 import { SearchInput } from "../../atoms/inputs/search-input/SearchInput";
 import { useDebounce } from "react-use";
+import { ICharacterDataType } from "../../../utils/types";
 
 const CharactersList = () => {
   const [searchItem, setSearchItem] = useState("");
   const [openModal, setOpenModal] = useState(false);
-  const [selectedCharacter, setSelectedCharacter] = useState<any>(null);
+  const [selectedCharacter, setSelectedCharacter] =
+    useState<ICharacterDataType | null>(null);
   const {
     totalCharacters,
     page,
@@ -89,11 +91,13 @@ const CharactersList = () => {
           />
         </div>
       )}
-      <CharacterDetails
-        selectedCharacter={selectedCharacter}
-        openModal={openModal}
-        closeModal={setOpenModal}
-      />
+      {selectedCharacter && (
+        <CharacterDetails
+          openModal={openModal}
+          closeModal={setOpenModal}
+          selectedCharacter={selectedCharacter}
+        />
+      )}
     </section>
   );
 };

@@ -5,10 +5,11 @@ import Text from "../../atoms/typography/Text";
 import Title from "../../atoms/typography/title";
 import Modal from "../modal";
 import "./character-details-styles.scss";
+import { ICharacterDataType } from "../../../utils/types";
 
 interface ICharacterDetailsProps {
+  selectedCharacter: ICharacterDataType;
   openModal: boolean;
-  selectedCharacter: any;
   closeModal: (val: boolean) => void;
 }
 
@@ -26,37 +27,21 @@ const Description = ({ title, content }: IDescriptionProps) => {
   );
 };
 const CharacterDetails = memo(
-  ({ openModal, selectedCharacter, closeModal }: ICharacterDetailsProps) => {
+  ({ selectedCharacter, openModal, closeModal }: ICharacterDetailsProps) => {
+    const { name, mass, height, imageUrl, films, created, birth_year } =
+      selectedCharacter;
+
     return (
-      <Modal
-        showModal={openModal}
-        title={selectedCharacter?.name}
-        closeModal={closeModal}
-      >
+      <Modal showModal={openModal} title={name} closeModal={closeModal}>
         <div className="img-container">
-          <img
-            src={selectedCharacter?.imageUrl}
-            alt={selectedCharacter?.name}
-          />
+          <img src={imageUrl} alt={name} />
         </div>
         <article className="description">
-          <Description
-            title="Height"
-            content={`${selectedCharacter?.height}m`}
-          />
-          <Description title="Mass" content={`${selectedCharacter?.mass}kg`} />
-          <Description
-            title="Films"
-            content={selectedCharacter?.films?.length}
-          />
-          <Description
-            title="Birth Year"
-            content={selectedCharacter?.birth_year}
-          />
-          <Description
-            title="Added on"
-            content={formatDate(selectedCharacter?.created)}
-          />
+          <Description title="Height" content={`${height}m`} />
+          <Description title="Mass" content={`${mass}kg`} />
+          <Description title="Films" content={`${films.length}`} />
+          <Description title="Birth Year" content={birth_year} />
+          <Description title="Added on" content={formatDate(created)} />
         </article>
       </Modal>
     );

@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ICharacterDataType } from "../utils/types";
 
 export const useFetchCharacters = (searchItem: string) => {
   const [totalCharacters, setTotalCharacters] = useState<number>(0);
   const [page, setPage] = useState(1);
-  const [characters, setCharacters] = useState<any[]>([]);
+  const [characters, setCharacters] = useState<ICharacterDataType[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<unknown>(null);
 
@@ -62,7 +63,7 @@ export const useFetchCharacters = (searchItem: string) => {
   // search characters
   const searchCharacters = () => {
     fetchCharacters(
-      `https://swapi.dev/api/people/?search=${searchItem}&page=${page}`,
+      `https://swapi.dev/api/people/?search=${searchItem}`,
       `https://picsum.photos/v2/list?page=${page}&limit=10`
     );
   };
@@ -73,7 +74,10 @@ export const useFetchCharacters = (searchItem: string) => {
     }
 
     if (searchItem) {
-      searchCharacters();
+      fetchCharacters(
+        `https://swapi.dev/api/people/?search=${searchItem}&page=${page}`,
+        `https://picsum.photos/v2/list?page=${page}&limit=10`
+      );
     }
 
     return () => {

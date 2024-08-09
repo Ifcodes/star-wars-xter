@@ -18,7 +18,7 @@ const Loading = ({
     return (
       <div
         data-testid="skeletons"
-        className="w-full grid grid-cols-3 mt-8 gap-x-4 gap-y-8"
+        className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-x-4 gap-y-8"
       >
         {Array(count)
           .fill("")
