@@ -8,6 +8,9 @@ A star warz character list application.
 To run this project on your local machine:
 
 - Clone this repository.
+  ```bash
+  git clone https://github.com/Ifcodes/star-wars-xters.git
+  ```
 
 - Install all dependencies using 
 
@@ -15,6 +18,7 @@ To run this project on your local machine:
   yarn install
 ```
 - Run
-  ```bash
-  yarn dev
-  ```
+
+```bash
+yarn dev
+```
