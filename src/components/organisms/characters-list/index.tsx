@@ -81,7 +81,7 @@ const CharactersList = () => {
             />
           ))}
       </div>
-      {characters.length > 0 && (
+      {!loading && characters.length > 0 && (
         <div className="flex justify-end">
           <Pagenation
             handleCurrentPage={handlePageChange}
