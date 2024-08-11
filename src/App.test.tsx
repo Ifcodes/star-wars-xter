@@ -27,12 +27,18 @@ describe("should render all content", () => {
     expect(screen.getByTestId("page-title")).toHaveTextContent("Characters");
   });
 
-  it("should render page description with text '' ", () => {
+  it("should render page description with text 'Here are your favourite star wars character.' ", () => {
     render(<App />);
 
     expect(screen.getByTestId("page-description")).toBeInTheDocument();
     expect(screen.getByTestId("page-description")).toHaveTextContent(
       "Here are your favourite star wars character."
     );
+  });
+
+  it("should render page the searchbox' ", () => {
+    render(<App />);
+
+    expect(screen.getByTestId("search")).toBeInTheDocument();
   });
 });

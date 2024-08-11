@@ -34,6 +34,8 @@ const Pagenation = memo(
     return (
       <div className="pages-container">
         <SlArrowLeft
+          role="previous-button"
+          aria-roledescription="previous-button"
           onClick={handlePrev}
           size={16}
           className={clsx("cursor-pointer", {
@@ -55,6 +57,8 @@ const Pagenation = memo(
           ))}
         </div>
         <SlArrowRight
+          role="next-button"
+          aria-roledescription="next-button"
           onClick={handleNext}
           size={16}
           className={clsx("cursor-pointer", {
