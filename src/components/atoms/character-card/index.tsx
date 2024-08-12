@@ -12,7 +12,12 @@ interface ICharacterCardProps {
 const CharacterCard = memo(
   ({ imageUrl, characterName, handleCardClick }: ICharacterCardProps) => {
     return (
-      <div className="character-card-wrapper" onClick={handleCardClick}>
+      <li
+        data-testid="character-list-item"
+        aria-label="character-list-item"
+        className="character-card-wrapper"
+        onClick={handleCardClick}
+      >
         <div className="character-img-container">
           <LazyLoadImage
             src={imageUrl}
@@ -22,12 +27,13 @@ const CharacterCard = memo(
         </div>
         <Title
           id={characterName}
+          aria-label="Character name"
           otherClasses="cursor-pointer hover:text-grey2 transition-all duration-200"
           text={characterName}
           variant="h2"
           onClick={handleCardClick}
         />
-      </div>
+      </li>
     );
   }
 );

@@ -33,19 +33,19 @@ const Pagenation = memo(
 
     return (
       <div className="pages-container">
-        <SlArrowLeft
-          role="previous-button"
-          aria-roledescription="previous-button"
+        <button
+          disabled={currentPage <= 1}
+          data-testid="previous-button"
+          className="border-none bg-transparent outline-none w-max p-4 hover:bg-grey1 hover:text-dark rounded-full"
           onClick={handlePrev}
-          size={16}
-          className={clsx("cursor-pointer", {
-            "cursor-not-allowed": currentPage <= 1,
-          })}
-        />
+        >
+          <SlArrowLeft size={16} />
+        </button>
 
         <div className="page-numbers-container hidden">
           {pageList.map((_p, idx) => (
             <button
+              data-testid="page-number-button"
               onClick={() => handleCurrentPage(idx + 1)}
               className={clsx("page-number", {
                 "bg-grey1 text-dark": currentPage === idx + 1,
@@ -56,15 +56,14 @@ const Pagenation = memo(
             </button>
           ))}
         </div>
-        <SlArrowRight
-          role="next-button"
-          aria-roledescription="next-button"
+        <button
+          data-testid="next-button"
+          className="border-none bg-transparent outline-none w-max p-4 hover:bg-grey1 hover:text-dark rounded-full"
+          disabled={currentPage > pageList.length - 1}
           onClick={handleNext}
-          size={16}
-          className={clsx("cursor-pointer", {
-            "cursor-not-allowed": currentPage > pageList.length - 1,
-          })}
-        />
+        >
+          <SlArrowRight size={16} />
+        </button>
       </div>
     );
   }

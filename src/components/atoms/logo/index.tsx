@@ -7,7 +7,7 @@ const Logo = () => {
   const { theme } = useTheme();
   return (
     <img
-      role="logo"
+      aria-label="logo"
       src={theme === "dark" ? LogoDark : LogoLight}
       alt="star wars logo"
     />

@@ -55,7 +55,10 @@ const CharactersList = () => {
   }
 
   return (
-    <section role="Character List Section" className="character-list-wrapper">
+    <section
+      aria-label="Character List Section"
+      className="character-list-wrapper"
+    >
       <header className="section-header">
         <div>
           <Title data-testid="page-title" text="Characters" variant="h1" />
@@ -70,7 +73,7 @@ const CharactersList = () => {
         />
       </header>
       <Loading count={9} isLoading={loading} />
-      <div className="character-list">
+      <ul className="character-list">
         {characters.length > 0 &&
           characters.map((character) => (
             <CharacterCard
@@ -80,7 +83,7 @@ const CharactersList = () => {
               handleCardClick={() => handleCharacterSelection(character)}
             />
           ))}
-      </div>
+      </ul>
       {!loading && characters.length > 0 && (
         <div className="flex justify-end">
           <Pagenation
