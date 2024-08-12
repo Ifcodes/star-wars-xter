@@ -27,6 +27,14 @@ export const useFetchCharacters = (searchItem: string) => {
       const res = await axios.get(photosEndpoint);
 
       if (
+        (res.data && res.data.length === 0) ||
+        (chars.data && chars.data.results.length === 0)
+      ) {
+        setError("No record found");
+        setLoading(false);
+      }
+
+      if (
         res.data &&
         res.data.length > 0 &&
         chars.data &&
@@ -61,7 +69,9 @@ export const useFetchCharacters = (searchItem: string) => {
     );
   };
   // search characters
-  const searchCharacters = () => {
+  const searchCharacters = (searchItem: string) => {
+    console.log({ searchItem });
+
     fetchCharacters(
       `https://swapi.dev/api/people/?search=${searchItem}`,
       `https://picsum.photos/v2/list?page=${page}&limit=10`
@@ -73,6 +83,7 @@ export const useFetchCharacters = (searchItem: string) => {
       getCharacters();
     }
 
+    // for paginated search results
     if (searchItem) {
       fetchCharacters(
         `https://swapi.dev/api/people/?search=${searchItem}&page=${page}`,

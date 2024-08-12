@@ -31,7 +31,7 @@ const CharactersList = () => {
 
   useDebounce(
     () => {
-      searchCharacters();
+      searchCharacters(searchItem);
     },
     1000,
     [searchItem]
@@ -74,7 +74,8 @@ const CharactersList = () => {
       </header>
       <Loading count={9} isLoading={loading} />
       <ul className="character-list">
-        {characters.length > 0 &&
+        {!loading &&
+          characters.length > 0 &&
           characters.map((character) => (
             <CharacterCard
               key={character.imageUrl}

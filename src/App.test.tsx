@@ -4,6 +4,15 @@ import userEvent from "@testing-library/user-event";
 
 describe("should render all content", () => {
   const user = userEvent.setup();
+  // beforeEach(() => {
+  //   // Use fake timers
+  //   vi.useFakeTimers();
+  // });
+
+  // afterEach(() => {
+  //   // Restore real timers
+  //   vi.useRealTimers();
+  // });
 
   it("should render logo", () => {
     render(<App />);
@@ -79,9 +88,32 @@ describe("should render all content", () => {
     expect(previousList.length).toBe(10);
   });
 
-  it("should render page the searchbox' ", () => {
+  it("should render the searchbox' ", () => {
     render(<App />);
 
     expect(screen.getByTestId("search")).toBeInTheDocument();
+  });
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    // Restore real timers
+    vi.useRealTimers();
+  });
+
+  it("should render search results", async () => {
+    render(<App />);
+
+    const searchInput = screen.getByTestId("search");
+    await user.type(searchInput, "lk");
+
+    vi.advanceTimersByTime(2000);
+
+    expect(searchInput).toHaveValue("lk");
+    const result = await screen.findAllByTestId("character-list-item");
+
+    expect(result).toHaveLength(0);
   });
 });
