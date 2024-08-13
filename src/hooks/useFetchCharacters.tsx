@@ -70,8 +70,6 @@ export const useFetchCharacters = (searchItem: string) => {
   };
   // search characters
   const searchCharacters = (searchItem: string) => {
-    console.log({ searchItem });
-
     fetchCharacters(
       `https://swapi.dev/api/people/?search=${searchItem}`,
       `https://picsum.photos/v2/list?page=${page}&limit=10`

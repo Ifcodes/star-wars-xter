@@ -23,12 +23,13 @@ const FetchErrorComponent = ({
       <Title
         otherClasses="mb-4 w-full md:w-[35rem]"
         text={
-          error ||
-          `Opps! Something went wrong. ${
-            error?.message === "Network Error"
-              ? "Please check your network connection"
-              : ""
-          }`
+          typeof error === "string"
+            ? error
+            : `Opps! Something went wrong. ${
+                error?.message === "Network Error"
+                  ? "Please check your network connection"
+                  : error.message
+              }`
         }
         variant="h2"
       />

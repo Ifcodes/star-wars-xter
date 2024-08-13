@@ -20,13 +20,15 @@ const Modal = ({ title, showModal, closeModal, children }: IModalProps) => {
 
   return (
     <div
+      data-testid="modal-overlay"
+      aria-label="modal-overlay"
       className={clsx("overlay", {
         "open-overlay": showModal,
       })}
     >
       <dialog open={showModal} ref={ref}>
         <header className="modal-nav">
-          <Title text={title} variant="h1" />
+          <Title data-testid="character-name" text={title} variant="h1" />
           <IoMdClose
             size={24}
             onClick={() => closeModal(false)}

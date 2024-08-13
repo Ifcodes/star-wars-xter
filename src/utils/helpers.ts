@@ -7,32 +7,19 @@ export const formatDate = (dateString: string) => {
   return `${day}-${month}-${year}`;
 };
 
-export const getPaginationRange = (currentPage: number, totalPages: number) => {
-  const range = [];
-  const delta = 2; // Number of pages to show around the current page
-  const startRange = Math.max(2, currentPage - delta); // Start range after the first page
-  const endRange = Math.min(totalPages - 1, currentPage + delta); // End range before the last page
+export const generatePaginatedList = <T>(
+  data: T[],
+  page: number,
+  limit: number
+): T[] => {
+  const validPage = page || 1;
+  const start = (validPage - 1) * limit;
+  const end = start + limit;
 
-  // Add the first page
-  if (currentPage > delta + 2) {
-    range.push(1);
-    if (currentPage > delta + 3) {
-      range.push("...");
-    }
-  }
-
-  // Add pages around the current page
-  for (let i = startRange; i <= endRange; i++) {
-    range.push(i);
-  }
-
-  // Add the last page
-  if (currentPage < totalPages - delta - 1) {
-    if (currentPage < totalPages - delta - 2) {
-      range.push("...");
-    }
-    range.push(totalPages);
-  }
-
-  return range;
+  return data.slice(start, end);
 };
+
+// delay function for testing purposes
+export function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

@@ -1,18 +1,13 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import App from "./App";
 import userEvent from "@testing-library/user-event";
+import { server } from "./mocks/server";
+import { HttpResponse, http } from "msw";
+import { charactersData } from "./mocks/mock-data";
+import { delay } from "./utils/helpers";
 
 describe("should render all content", () => {
   const user = userEvent.setup();
-  // beforeEach(() => {
-  //   // Use fake timers
-  //   vi.useFakeTimers();
-  // });
-
-  // afterEach(() => {
-  //   // Restore real timers
-  //   vi.useRealTimers();
-  // });
 
   it("should render logo", () => {
     render(<App />);
@@ -54,7 +49,6 @@ describe("should render all content", () => {
     const listItems = await screen.findAllByTestId("character-list-item");
     // To find that the single character is in the rendered list
     const character = screen.getByText("C-3PO");
-    // To find that the single character is not on the list.
 
     expect(listItems.length).toBe(10);
     expect(character).toBeInTheDocument();
@@ -68,7 +62,6 @@ describe("should render all content", () => {
     expect(listItems.length).toBe(10);
 
     // test pagination with next button
-
     const nextButton = screen.getByTestId("next-button");
     await user.click(nextButton);
 
@@ -79,12 +72,10 @@ describe("should render all content", () => {
     expect(screen.getByAltText("Denver Vader")).toBeInTheDocument();
 
     // test pagination with previous button
-
     const previousButton = screen.getByTestId("previous-button");
     await user.click(previousButton);
 
     const previousList = await screen.findAllByTestId("character-list-item");
-
     expect(previousList.length).toBe(10);
   });
 
@@ -94,26 +85,77 @@ describe("should render all content", () => {
     expect(screen.getByTestId("search")).toBeInTheDocument();
   });
 
-  beforeEach(() => {
-    vi.useFakeTimers();
-  });
-
-  afterEach(() => {
-    // Restore real timers
-    vi.useRealTimers();
-  });
-
   it("should render search results", async () => {
     render(<App />);
 
     const searchInput = screen.getByTestId("search");
-    await user.type(searchInput, "lk");
+    await act(async () => {
+      await userEvent.type(searchInput, "Luke");
+      await delay(1000); // wait 1 second for debounce effect
+    });
 
-    vi.advanceTimersByTime(2000);
+    expect(searchInput).toHaveValue("Luke");
+    const result = screen.queryAllByTestId("character-list-item");
 
-    expect(searchInput).toHaveValue("lk");
-    const result = await screen.findAllByTestId("character-list-item");
+    expect(result).toHaveLength(1);
+    expect(screen.getByAltText("Luke Skywalker")).toBeInTheDocument();
+  });
 
-    expect(result).toHaveLength(0);
+  it("should render No Record error message", async () => {
+    server.use(
+      http.get("https://swapi.dev/api/people", () => {
+        return HttpResponse.json(
+          { ...charactersData, results: [] },
+          { status: 200 }
+        );
+      })
+    );
+
+    render(<App />);
+
+    expect(await screen.findByText("No record found")).toBeInTheDocument();
+  });
+
+  it("should render network error message", async () => {
+    server.use(
+      http.get("https://swapi.dev/api/people", () => {
+        return HttpResponse.error();
+      })
+    );
+
+    render(<App />);
+
+    expect(
+      await screen.findByText(
+        "Opps! Something went wrong. Please check your network connection"
+      )
+    ).toBeInTheDocument();
+  });
+
+  it("should open modal on card click", async () => {
+    render(<App />);
+
+    await screen.findAllByTestId("character-list-item");
+    // To find that the single character is in the rendered list
+    const character = screen.getByText("C-3PO");
+    await user.click(character);
+
+    expect(screen.getByTestId("modal-overlay")).toBeInTheDocument();
+  });
+
+  it("should render character details on modal correctly", async () => {
+    render(<App />);
+
+    await screen.findAllByTestId("character-list-item");
+
+    // To find that the single character is in the rendered list
+    const character = screen.getByText("C-3PO");
+    await user.click(character);
+
+    expect(screen.getByTestId("modal-overlay")).toBeInTheDocument();
+    expect(screen.getByTestId("character-name")).toBeInTheDocument();
+    expect(screen.getByTestId("character-name")).toHaveTextContent("C-3PO");
+    expect(screen.getByTestId("character-details-img")).toBeInTheDocument();
+    expect(screen.getByTestId("description")).toBeInTheDocument();
   });
 });

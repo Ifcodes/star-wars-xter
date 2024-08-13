@@ -34,9 +34,13 @@ const CharacterDetails = memo(
     return (
       <Modal showModal={openModal} title={name} closeModal={closeModal}>
         <div className="img-container">
-          <img src={imageUrl} alt={name} />
+          <img data-testid="character-details-img" src={imageUrl} alt={name} />
         </div>
-        <article className="description">
+        <article
+          aria-label="character description"
+          data-testid="description"
+          className="description"
+        >
           <Description title="Height" content={`${height}m`} />
           <Description title="Mass" content={`${mass}kg`} />
           <Description title="Films" content={`${films.length}`} />
