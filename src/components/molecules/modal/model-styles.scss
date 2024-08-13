@@ -2,7 +2,7 @@
   @apply w-screen h-screen fixed top-0 left-0 z-50 bg-[#0000008f] hidden justify-center items-center transition-all duration-200 backdrop-blur-sm;
 
   dialog {
-    @apply w-[90%] md:w-[40rem] min-h-[20rem] bg-white text-dark dark:bg-[rgba(0,0,0,0.92)] dark:text-white shadow-2xl shadow-zinc-700 rounded-md absolute top-[9rem] md:top-[16rem] p-4 transition-all delay-200;
+    @apply w-[90%] md:w-[40rem] min-h-[20rem] bg-white text-dark dark:bg-[rgba(0,0,0,0.92)] dark:text-white shadow-2xl shadow-zinc-700 rounded-md absolute top-[8rem] md:top-[16rem] p-4 transition-all delay-200;
 
     animation: animate-modal 1000ms ease;
 
